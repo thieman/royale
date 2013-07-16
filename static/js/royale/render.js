@@ -5,8 +5,6 @@ $(window).load(function() {
 $(window).on('resize', resizeWindow);
 
 function resizeWindow() {
-	$('#wrapper').css('height', $(window).height() - 10);
-	$('img').each(function() {
-		$(this).css('height', $(this).parents('.feed-element').height() * 0.8);
-	});
+	$('#wrapper').css('height', $('body').height() - 10);
+	app.render();
 }

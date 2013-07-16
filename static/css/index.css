@@ -1,6 +1,12 @@
-html, body {
+html {
+  height: 100%;
+}
+
+body {
   background-color: #EEE !important;
   font-family: 'Oswald', sans-serif;
+  min-height: 700px !important;
+  height: 100%;
 }
 
 .feed-element {
@@ -13,14 +19,13 @@ html, body {
 }
 
 .feed-content {
-  padding-top: 20px;
-  width: 40%;
+  padding-top: 1%;
+  width: 50%;
 }
 
 .metric-title {
   text-align: center;
   color: black;
-  font-size: 52px;
 }
 
 .feed-metrics {
@@ -31,7 +36,6 @@ html, body {
   display: inline-block;
   width: 44%;
   vertical-align: middle;
-  font-size: 82px;
 }
 
 .metric-current {
@@ -40,8 +44,8 @@ html, body {
   text-align: right;
 }
 
-.metric-previous {
-  color: #777;
+.metric-compare {
+  color: #999;
   margin-left: 5%;
   text-align: left;
 }
@@ -50,12 +54,73 @@ html, body {
   position: absolute;
   top: 5px;
   right: 5px;
-  color: #AAAAAA;
+  color: #AAA;
+  font-size: 16px;
 }
 
-.graph {
+.chart {
   position: absolute;
   bottom: 5px;
   right: 5px;
   overflow: hidden;
+}
+
+@media screen and (min-height:1px) and (max-height:800px) {
+
+	.metric-title {
+		font-size: 52px;
+	}
+
+	.metric {
+		font-size: 80px;
+	}
+
+}
+
+@media screen and (min-height:801px) and (max-height:900px) {
+
+	.metric-title {
+		font-size: 60px;
+	}
+
+	.metric {
+		font-size: 88px;
+	}
+
+}
+
+@media screen and (min-height:901px) and (max-height: 1000px) {
+
+	.metric-title {
+		font-size: 66px;
+	}
+
+	.metric {
+		font-size: 96px;
+	}
+
+}
+
+@media screen and (min-height: 1001px) and (max-height: 1150px) {
+
+	.metric-title {
+		font-size: 74px;
+	}
+
+	.metric {
+		font-size: 110px;
+	}
+
+}
+
+@media screen and (min-height: 1151px) {
+
+	.metric-title {
+		font-size: 84px;
+	}
+
+	.metric {
+		font-size: 124px;
+	}
+
 }

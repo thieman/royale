@@ -30,6 +30,16 @@ var MetricView = Backbone.View.extend({
 			compare: this.model.get('metric').compare,
 			updated: moment(this.model.get('metric').updated).fromNow()
 		}));
+
+		var spec = this.model.get('chart').chart;
+
+		vg.parse.spec(spec, function(chart) {
+			chart({el: '.chart'})
+				.width($('.feed-element').width() * 0.5)
+				.height($('.feed-element').height() * 0.74)
+				.update();
+		});
+
 		return this;
 	}
 
@@ -46,6 +56,7 @@ var FeedView = Backbone.View.extend({
 	},
 
 	render: function() {
+		this.$el.empty();
 		this.collection.each(function(metric) {
 			var view = new MetricView({model: metric});
 			this.$el.append(view.render().el);
@@ -56,5 +67,5 @@ var FeedView = Backbone.View.extend({
 });
 
 $(function() {
-	var app = new FeedView;
+	window.app = new FeedView;
 });
