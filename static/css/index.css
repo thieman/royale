@@ -1,0 +1,61 @@
+html, body {
+  background-color: #EEE !important;
+  font-family: 'Oswald', sans-serif;
+}
+
+.feed-element {
+  margin-left: 5%;
+  width: 90%;
+  position: relative;
+  height: 31.5%;
+  border-bottom: 2px solid grey;
+  margin-bottom: 10px;
+}
+
+.feed-content {
+  padding-top: 20px;
+  width: 40%;
+}
+
+.metric-title {
+  text-align: center;
+  color: black;
+  font-size: 52px;
+}
+
+.feed-metrics {
+  margin-top: 20px;
+}
+
+.metric {
+  display: inline-block;
+  width: 44%;
+  vertical-align: middle;
+  font-size: 82px;
+}
+
+.metric-current {
+  color: black;
+  margin-right: 5%;
+  text-align: right;
+}
+
+.metric-previous {
+  color: #777;
+  margin-left: 5%;
+  text-align: left;
+}
+
+.timestamp {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #AAAAAA;
+}
+
+.graph {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  overflow: hidden;
+}
