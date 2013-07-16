@@ -5,7 +5,8 @@ html {
 body {
   background-color: #EEE !important;
   font-family: 'Oswald', sans-serif;
-  min-height: 700px !important;
+  min-height: 700px;
+  min-width: 1200px;
   height: 100%;
 }
 

@@ -1,11 +1,9 @@
 var Metric = Backbone.Model.extend({
-
 	defaults: {
 		id: null,
 		metric: {},
 		chart: {}
 	}
-
 });
 
 var MetricList = Backbone.Collection.extend({
@@ -25,7 +23,7 @@ var MetricView = Backbone.View.extend({
 
 	render: function() {
 		this.$el.html(this.template({
-			id: this.model.get('id'),
+			id: this.model.id,
 			current: this.model.get('metric').current,
 			compare: this.model.get('metric').compare,
 			updated: moment(this.model.get('metric').updated).fromNow()
@@ -33,12 +31,14 @@ var MetricView = Backbone.View.extend({
 
 		var spec = this.model.get('chart').chart;
 
-		vg.parse.spec(spec, function(chart) {
-			chart({el: '.chart'})
-				.width($('.feed-element').width() * 0.5)
-				.height($('.feed-element').height() * 0.74)
-				.update();
-		});
+		(function (renderId) {
+			vg.parse.spec(spec, function(chart) {
+				chart({el: '#chart-' + renderId})
+					.width($('.feed-element').width() * 0.5)
+					.height($('.feed-element').height() * 0.74)
+					.update();
+			});
+		})(this.model.id);
 
 		return this;
 	}
@@ -52,6 +52,9 @@ var FeedView = Backbone.View.extend({
 	initialize: function() {
 		this.collection = new MetricList();
 		this.collection.bind('reset', _.bind(this.render, this));
+		this.collection.bind('add', _.bind(this.add, this));
+		this.collection.bind('remove', _.bind(this.add, this));
+		this.collection.bind('change', _.bind(this.add, this));
 		this.collection.fetch({reset: true});
 	},
 
@@ -62,6 +65,15 @@ var FeedView = Backbone.View.extend({
 			this.$el.append(view.render().el);
 		}, this);
 		return this;
+	},
+
+	add: function() {
+	},
+
+	remove: function() {
+	},
+
+	change: function() {
 	}
 
 });
