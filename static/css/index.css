@@ -10,9 +10,15 @@ body {
   height: 100%;
 }
 
+.cycle-control {
+	cursor: pointer;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+
 .feed-element {
-  margin-left: 5%;
-  width: 90%;
+  width: 100%;
   position: relative;
   height: 31.5%;
   border-bottom: 2px solid grey;
@@ -54,7 +60,7 @@ body {
 .timestamp {
   position: absolute;
   top: 5px;
-  right: 5px;
+  right: 25px;
   color: #AAA;
   font-size: 16px;
 }

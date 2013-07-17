@@ -1,10 +1,10 @@
 $(window).load(function() {
-	resizeWindow();
+	resizeWindow(true);
 });
 
 $(window).on('resize', resizeWindow);
 
-function resizeWindow() {
+function resizeWindow(firstLoad) {
 	$('#wrapper').css('height', $('body').height() - 10);
-	app.render();
+	app.render(firstLoad === true ? false : true);
 }

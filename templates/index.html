@@ -20,15 +20,23 @@
       </div>
     </div>
     <div class='timestamp'>Updated {{updated}}</div>
-    <div id='chart-{{id}}' class='chart'>
+    <div id='chart-{{guid}}' class='chart'>
       {{chart}}
     </div>
   </script>
+
+  <script id='cycle-control-template' type='text/x-handlebars-template'>
+    <img class='cycle-control' src={{src}}>
+  </script>
 {% endraw %}
+
+<div id='control-wrapper'>
+</div>
 
 <div id='wrapper' class='container'>
 </div>
 
+<script type='text/javascript' src='/static/js/royale/util.js'></script>
 <script type='text/javascript' src='/static/js/royale/model.js'></script>
 <script type='text/javascript' src='/static/js/royale/render.js'></script>
 
