@@ -15,7 +15,7 @@ var Metric = Backbone.Model.extend({
 
 var MetricList = Backbone.Collection.extend({
 	model: Metric,
-	url: '/metrics'
+	url: $SCRIPT_ROOT + '/metrics'
 });
 
 var CycleControl = Backbone.Model.extend({
@@ -148,7 +148,7 @@ var FeedView = Backbone.View.extend({
 	},
 
 	cycle: function() {
-		if (this.control.model.get('cycle')) {
+		if (this.control.model.get('cycle') && this.collection.length !== 0) {
 			var first = this.collection.shift();
 			setTimeout(function() { app.collection.push(first); }, 1000);
 		}

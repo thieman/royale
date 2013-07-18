@@ -47,7 +47,7 @@ class MetricList(Resource):
                            'chart': chart}
             metrics.append(serialize(metric_data))
 
-        return metrics
+        return metrics if metrics else None
 
 class Metric(Resource):
     """ Defines a metric to show in the Royale dashboard.
