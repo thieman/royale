@@ -1,7 +1,6 @@
 """ Glues the various daemon pieces together to avoid circular imports. """
 
 from daemon import app
-from config import *
 from resources import *
 from views import *
 
