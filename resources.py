@@ -40,7 +40,7 @@ class MetricList(Resource):
                                             json.dumps(series['values']),
                                             chart_data)
 
-            chart['chart'] = json.loads(chart_data)
+                chart['chart'] = json.loads(chart_data)
 
             metric_data = {'id': metric['_id'],
                            'metric': metric,
