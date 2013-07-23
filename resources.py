@@ -55,6 +55,7 @@ class Metric(Resource):
     Each metric has an ID and 'current' and 'compare' values. """
 
     metric_fields = {'_id': fields.String,
+                     'caption': fields.String,
                      'current': fields.String,
                      'compare': fields.String}
 
@@ -65,7 +66,7 @@ class Metric(Resource):
     @marshal_with(metric_fields)
     def post(self, metric_id):
         obj = {'updated': datetime.utcnow()}
-        for arg in ['compare', 'current']:
+        for arg in ['caption', 'compare', 'current']:
             value = request.form.get(arg, None)
             if value:
                 obj[arg] = value
@@ -77,7 +78,7 @@ class Metric(Resource):
     @marshal_with(metric_fields)
     def put(self, metric_id):
         obj = {'_id': metric_id, 'updated': datetime.utcnow()}
-        for arg in ['compare', 'current']:
+        for arg in ['caption', 'compare', 'current']:
             value = request.form.get(arg, None)
             if value:
                 obj[arg] = value

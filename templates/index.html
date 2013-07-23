@@ -14,6 +14,8 @@
   <script id='feed-template' type='text/x-handlebars-template'>
     <div class='feed-content'>
       <div class='metric-title'>{{id}}</div>
+      <div class='metric-caption {{#if caption}}caption{{else}}empty{{/if}}'>
+        {{#if caption}}{{caption}}{{else}}.{{/if}}</div>
       <div class='feed-metrics'>
         <div class='metric metric-current'>{{current}}</div>
         <div class='metric metric-compare'>({{compare}})</div>

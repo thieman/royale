@@ -7,6 +7,7 @@ var Metric = Backbone.Model.extend({
 
 	defaults: {
 		id: null,
+		caption: "",
 		metric: {},
 		chart: {}
 	}
@@ -74,6 +75,7 @@ var MetricView = Backbone.View.extend({
 
 		this.$el.html(this.template({
 			id: this.model.id,
+			caption: this.model.get('metric').caption,
 			current: this.model.get('metric').current,
 			compare: this.model.get('metric').compare,
 			updated: moment(this.model.get('metric').updated).fromNow(),

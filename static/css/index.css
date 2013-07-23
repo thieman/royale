@@ -35,8 +35,18 @@ body {
   color: black;
 }
 
+.metric-caption {
+  text-align: center;
+  color: #666;
+  margin-top: -10px;
+}
+
+.metric-caption.empty {
+	opacity: 0;
+}
+
 .feed-metrics {
-  margin-top: 20px;
+  margin-top: -10px;
 }
 
 .metric {
@@ -78,6 +88,10 @@ body {
 		font-size: 52px;
 	}
 
+	.metric-caption {
+		font-size: 28px;
+	}
+
 	.metric {
 		font-size: 80px;
 	}
@@ -88,6 +102,10 @@ body {
 
 	.metric-title {
 		font-size: 60px;
+	}
+
+	.metric-caption {
+		font-size: 34px;
 	}
 
 	.metric {
@@ -102,6 +120,10 @@ body {
 		font-size: 66px;
 	}
 
+	.metric-caption {
+		font-size: 38px;
+	}
+
 	.metric {
 		font-size: 96px;
 	}
@@ -114,6 +136,10 @@ body {
 		font-size: 74px;
 	}
 
+	.metric-caption {
+		font-size: 44px;
+	}
+
 	.metric {
 		font-size: 110px;
 	}
@@ -124,6 +150,10 @@ body {
 
 	.metric-title {
 		font-size: 84px;
+	}
+
+	.metric-caption {
+		font-size: 50px;
 	}
 
 	.metric {
