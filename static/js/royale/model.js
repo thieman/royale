@@ -26,7 +26,7 @@ var CycleControl = Backbone.Model.extend({
 	},
 
 	src: function() {
-		return this.get('prefix') + (this.get('cycle') ? 'pause.png' : 'play.png');
+		return $SCRIPT_ROOT + this.get('prefix') + (this.get('cycle') ? 'pause.png' : 'play.png');
 	}
 
 });
