@@ -77,7 +77,9 @@ var MetricView = Backbone.View.extend({
 			id: this.model.id,
 			caption: this.model.get('metric').caption,
 			current: this.model.get('metric').current,
+			currentCaption: this.model.get('metric').current_caption,
 			compare: this.model.get('metric').compare,
+			compareCaption: this.model.get('metric').compare_caption,
 			updated: moment(this.model.get('metric').updated).fromNow(),
 			guid: this.guid
 		}));
