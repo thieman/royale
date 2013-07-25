@@ -91,7 +91,7 @@ var MetricView = Backbone.View.extend({
 				vg.parse.spec(spec, function(chart) {
 					chart({el: '#chart-' + thisGuid})
 						.width($('.feed-element').width() * 0.5)
-						.height($('.feed-element').height() * 0.74)
+						.height($('.feed-element').height() * 0.78)
 						.update();
 				});
 			})(this.model.id, this.guid);
@@ -138,7 +138,7 @@ var FeedView = Backbone.View.extend({
 
 	render: function(reverse) {
 
-		_.each(this.collection, function(model) {
+		this.collection.each(function(model) {
 			_.each(this.views, function(view) {
 				var app = this[0];
 				var coll = this[1];
@@ -162,7 +162,7 @@ var FeedView = Backbone.View.extend({
 
 $(document).ready(function() {
 	app = new FeedView;
-	cycleInterval = setInterval(function() { app.cycle(); }, 5000);
+	cycleInterval = setInterval(function() { app.cycle(); }, 30000);
 	refreshInterval = setInterval(function() { app.collection.fetch(); },
-								  5000);
+								  30000);
 });
