@@ -85,7 +85,7 @@ var MetricView = Backbone.View.extend({
 		}));
 
 		if (this.model.has('chart')) {
-			var spec = this.model.get('chart').chart;
+			var spec = $.extend(true, {}, this.model.get('chart').chart);
 
 			(function (renderId, thisGuid) {
 				vg.parse.spec(spec, function(chart) {
@@ -136,12 +136,12 @@ var FeedView = Backbone.View.extend({
 		}, model);
 	},
 
-	render: function(reverse) {
+	render: function() {
 
 		this.collection.each(function(model) {
 			_.each(this.views, function(view) {
 				var app = this[0];
-				var coll = this[1];
+				var model = this[1];
 				if (view.model === model) {
 					app.$el.append(view.render().el);
 				}
