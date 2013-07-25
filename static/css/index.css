@@ -79,7 +79,7 @@ body {
 
 .timestamp {
   position: absolute;
-  top: 5px;
+  top: -5px;
   right: 25px;
   color: #AAA;
   font-size: 16px;
