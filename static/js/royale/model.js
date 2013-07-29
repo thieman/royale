@@ -86,14 +86,14 @@ var MetricView = Backbone.View.extend({
 
 		if (this.model.has('chart')) {
 			var spec = $.extend(true, {}, this.model.get('chart').chart);
-			spec['width'] = $('.feed-element').width() * 0.5;
-			spec['height'] = $('.feed-element').height() * 0.78;
+			spec['width'] = $('.feed-element').last().width() * 0.5;
+			spec['height'] = $('.feed-element').last().height() * 0.78;
 
 			(function (renderId, thisGuid) {
 				vg.parse.spec(spec, function(chart) {
 					chart({el: '#chart-' + thisGuid})
-						.width($('.feed-element').width() * 0.5)
-						.height($('.feed-element').height() * 0.78)
+						.width($('.feed-element').last().width() * 0.5)
+						.height($('.feed-element').last().height() * 0.78)
 						.update();
 				});
 			})(this.model.id, this.guid);
