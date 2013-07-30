@@ -20,16 +20,17 @@ body {
 .feed-element {
   width: 100%;
   position: relative;
-  height: 31.5%;
+  height: 48.5%;
   border-bottom: 2px solid grey;
   margin-bottom: 10px;
 }
 
 .feed-content {
-  width: 50%;
+  width: 40%;
 }
 
 .metric-title {
+  padding-top: 4%;
   text-align: center;
   color: black;
 }
@@ -37,7 +38,7 @@ body {
 .metric-caption {
   text-align: center;
   color: #666;
-  margin-top: -10px;
+  margin-top: 3%;
 }
 
 .metric-caption.empty {
@@ -49,6 +50,7 @@ body {
 }
 
 .metric {
+  margin-top: 1%;
   display: inline-block;
   width: 44%;
   vertical-align: middle;
@@ -66,7 +68,7 @@ body {
 }
 
 .metric-current {
-  color: black;
+  color: steelblue;
   margin-right: 5%;
   text-align: right;
 }
@@ -82,7 +84,7 @@ body {
   top: -5px;
   right: 25px;
   color: #AAA;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .chart {
@@ -95,19 +97,19 @@ body {
 @media screen and (min-height:1px) and (max-height:800px) {
 
 	.metric-title {
-		font-size: 52px;
+		font-size: 64px;
 	}
 
 	.metric-caption {
-		font-size: 20px;
+		font-size: 32px;
 	}
 
 	.metric {
-		font-size: 80px;
+		font-size: 92px;
 	}
 
 	.metric-subcaption {
-		font-size: 16px;
+		font-size: 28px;
 	}
 
 }
@@ -115,19 +117,19 @@ body {
 @media screen and (min-height:801px) and (max-height:900px) {
 
 	.metric-title {
-		font-size: 60px;
+		font-size: 72px;
 	}
 
 	.metric-caption {
-		font-size: 24px;
+		font-size: 36px;
 	}
 
 	.metric {
-		font-size: 88px;
+		font-size: 100px;
 	}
 
 	.metric-subcaption {
-		font-size: 18px;
+		font-size: 30px;
 	}
 
 }
@@ -135,47 +137,7 @@ body {
 @media screen and (min-height:901px) and (max-height: 1000px) {
 
 	.metric-title {
-		font-size: 66px;
-	}
-
-	.metric-caption {
-		font-size: 28px;
-	}
-
-	.metric {
-		font-size: 96px;
-	}
-
-	.metric-subcaption {
-		font-size: 20px;
-	}
-
-}
-
-@media screen and (min-height: 1001px) and (max-height: 1150px) {
-
-	.metric-title {
-		font-size: 74px;
-	}
-
-	.metric-caption {
-		font-size: 34px;
-	}
-
-	.metric {
-		font-size: 110px;
-	}
-
-	.metric-subcaption {
-		font-size: 22px;
-	}
-
-}
-
-@media screen and (min-height: 1151px) {
-
-	.metric-title {
-		font-size: 84px;
+		font-size: 88px;
 	}
 
 	.metric-caption {
@@ -183,11 +145,51 @@ body {
 	}
 
 	.metric {
-		font-size: 124px;
+		font-size: 108px;
 	}
 
 	.metric-subcaption {
-		font-size: 26px;
+		font-size: 32px;
+	}
+
+}
+
+@media screen and (min-height: 1001px) and (max-height: 1150px) {
+
+	.metric-title {
+		font-size: 86px;
+	}
+
+	.metric-caption {
+		font-size: 46px;
+	}
+
+	.metric {
+		font-size: 122px;
+	}
+
+	.metric-subcaption {
+		font-size: 34px;
+	}
+
+}
+
+@media screen and (min-height: 1151px) {
+
+	.metric-title {
+		font-size: 96px;
+	}
+
+	.metric-caption {
+		font-size: 52px;
+	}
+
+	.metric {
+		font-size: 136px;
+	}
+
+	.metric-subcaption {
+		font-size: 38px;
 	}
 
 }

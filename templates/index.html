@@ -14,14 +14,14 @@
   <script id='feed-template' type='text/x-handlebars-template'>
     <div class='feed-content'>
       <div class='metric-title'>{{id}}</div>
-      <div class='metric-caption {{#if caption}}caption{{else}}empty{{/if}}'>
-        {{#if caption}}{{caption}}{{else}}.{{/if}}</div>
       <div class='feed-metrics'>
         <div class='metric metric-current'>{{current}}</div>
-        <div class='metric metric-compare'>({{compare}})</div>
+        <div class='metric metric-compare'>{{compare}}</div>
         <div class='metric-subcaption metric-current'>{{currentCaption}}</div>
         <div class='metric-subcaption metric-compare'>{{compareCaption}}</div>
       </div>
+      <div class='metric-caption {{#if caption}}caption{{else}}empty{{/if}}'>
+        {{#if caption}}{{caption}}{{else}}.{{/if}}</div>
     </div>
     <div class='timestamp'>Updated {{updated}}</div>
     <div id='chart-{{guid}}' class='chart'>
