@@ -2,8 +2,8 @@
 
 from flask import render_template
 
-from daemon import app
-
-@app.route('/', methods=['GET'])
 def index_route():
     return render_template('index.html')
+
+def register_views(bp):
+    bp.add_url_rule('/', 'index', index_route)

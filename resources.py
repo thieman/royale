@@ -7,8 +7,6 @@ from datetime import datetime
 from flask import request
 from flask.ext.restful import Resource, fields, marshal_with, abort
 
-from daemon import api, mongo
-
 def serialize(obj):
     for k, v in obj.iteritems():
         if isinstance(v, dict):
@@ -168,7 +166,8 @@ class Series(Resource):
         mongo.db.series.remove(series_id)
         return '', 204
 
-api.add_resource(MetricList, '/metrics')
-api.add_resource(Metric, '/metric/<string:metric_id>')
-api.add_resource(Chart, '/chart/<string:chart_id>')
-api.add_resource(Series, '/series/<string:series_id>')
+def register_resources(api, mongo):
+    api.add_resource(MetricList, '/metrics')
+    api.add_resource(Metric, '/metric/<string:metric_id>')
+    api.add_resource(Chart, '/chart/<string:chart_id>')
+    api.add_resource(Series, '/series/<string:series_id>')
