@@ -7,7 +7,7 @@ from flask.ext.pymongo import PyMongo
 from resources import register_resources
 from views import register_views
 
-class RoyaleBlueprintFactory():
+class RoyaleBlueprintFactory(object):
 
     def new(self, name, pymongo_instance):
 

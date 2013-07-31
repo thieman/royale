@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Royale{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel='stylesheet' href={{ url_for('static', filename='css/index.css') }}>
+<link href='http://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet' type='text/css'>
+{% endblock head %}
+
+{% block content %}
+
+{% raw %}
+  <script id='feed-template' type='text/x-handlebars-template'>
+    <div class='feed-content'>
+      <div class='metric-title'>{{id}}</div>
+      <div class='feed-metrics'>
+        <div class='metric metric-current'>{{current}}</div>
+        <div class='metric metric-compare'>{{compare}}</div>
+        <div class='metric-subcaption metric-current'>{{currentCaption}}</div>
+        <div class='metric-subcaption metric-compare'>{{compareCaption}}</div>
+      </div>
+      <div class='metric-caption {{#if caption}}caption{{else}}empty{{/if}}'>
+        {{#if caption}}{{caption}}{{else}}.{{/if}}</div>
+    </div>
+    <div class='timestamp'>Updated {{updated}}</div>
+    <div id='chart-{{guid}}' class='chart'>
+      {{chart}}
+    </div>
+  </script>
+
+  <script id='cycle-control-template' type='text/x-handlebars-template'>
+    <img class='cycle-control' src={{src}}>
+  </script>
+{% endraw %}
+
+<div id='wrapper' class='container'>
+</div>
+
+<div id='control-wrapper'>
+</div>
+
+<script type='text/javascript' src={{ url_for('static', filename='js/royale/util.js') }}></script>
+<script type='text/javascript' src={{ url_for('static', filename='js/royale/model.js') }}></script>
+<script type='text/javascript' src={{ url_for('static', filename='js/royale/render.js') }}></script>
+
+{% endblock %}

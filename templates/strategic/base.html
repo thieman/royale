@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+{% block head %}
+<title>{% block title %}{% endblock title %}</title>
+
+<script>
+  var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+
+<script src={{ url_for('static', filename='js/jquery-2.0.3.min.js') }}></script>
+<script src={{ url_for('static', filename='js/underscore-min.js') }}></script>
+<script src={{ url_for('static', filename='js/handlebars-1.0.rc.1.min.js') }}></script>
+<script src={{ url_for('static', filename='js/moment.min.js') }}></script>
+<script src={{ url_for('static', filename='js/backbone-min.js') }}></script>
+<script src={{ url_for('static', filename='js/d3.v3.min.js') }}></script>
+<script src={{ url_for('static', filename='js/vega.js') }}></script>
+
+{% endblock head %}
+
+</head>
+
+<body>
+{% block content %}{% endblock content %}
+</body>
+
+</html>
