@@ -1,10 +1,11 @@
-{% extends "base.html" %}
+{% extends "tactical/base.html" %}
 
 {% block title %}Royale{% endblock %}
 
 {% block head %}
 {{ super() }}
-<link rel='stylesheet' href={{ url_for('static', filename='css/index.css') }}>
+<link rel='stylesheet' href={{ url_for('static',
+      filename=blueprint_name + '/css/index.css') }}>
 <link href='http://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet' type='text/css'>
 {% endblock head %}
 
@@ -40,8 +41,8 @@
 <div id='control-wrapper'>
 </div>
 
-<script type='text/javascript' src={{ url_for('static', filename='js/royale/util.js') }}></script>
-<script type='text/javascript' src={{ url_for('static', filename='js/royale/model.js') }}></script>
-<script type='text/javascript' src={{ url_for('static', filename='js/royale/render.js') }}></script>
+<script type='text/javascript' src={{ url_for('static', filename=blueprint_name + '/js/royale/util.js') }}></script>
+<script type='text/javascript' src={{ url_for('static', filename=blueprint_name + '/js/royale/model.js') }}></script>
+<script type='text/javascript' src={{ url_for('static', filename=blueprint_name + '/js/royale/render.js') }}></script>
 
 {% endblock %}

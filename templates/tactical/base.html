@@ -7,16 +7,16 @@
 <title>{% block title %}{% endblock title %}</title>
 
 <script>
-  var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+  var $SCRIPT_ROOT = '/{{ blueprint_name|safe }}';
 </script>
 
-<script src={{ url_for('static', filename='js/jquery-2.0.3.min.js') }}></script>
-<script src={{ url_for('static', filename='js/underscore-min.js') }}></script>
-<script src={{ url_for('static', filename='js/handlebars-1.0.rc.1.min.js') }}></script>
-<script src={{ url_for('static', filename='js/moment.min.js') }}></script>
-<script src={{ url_for('static', filename='js/backbone-min.js') }}></script>
-<script src={{ url_for('static', filename='js/d3.v3.min.js') }}></script>
-<script src={{ url_for('static', filename='js/vega.js') }}></script>
+<script src={{ url_for('static', filename=blueprint_name + '/js/jquery-2.0.3.min.js') }}></script>
+<script src={{ url_for('static', filename=blueprint_name + '/js/underscore-min.js') }}></script>
+<script src={{ url_for('static', filename=blueprint_name + '/js/handlebars-1.0.rc.1.min.js') }}></script>
+<script src={{ url_for('static', filename=blueprint_name + '/js/moment.min.js') }}></script>
+<script src={{ url_for('static', filename=blueprint_name + '/js/backbone-min.js') }}></script>
+<script src={{ url_for('static', filename=blueprint_name + '/js/d3.v3.min.js') }}></script>
+<script src={{ url_for('static', filename=blueprint_name + '/js/vega.js') }}></script>
 
 {% endblock head %}
 

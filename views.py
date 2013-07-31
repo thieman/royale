@@ -2,8 +2,10 @@
 
 from flask import render_template
 
-def index_route():
-    return render_template('index.html')
+def index_route(blueprint_name=None):
+    return render_template('/'.join([blueprint_name, 'index.html']),
+                           blueprint_name=blueprint_name)
 
 def register_views(bp):
-    bp.add_url_rule('/', 'index', index_route)
+    defaults = {'blueprint_name': bp.name}
+    bp.add_url_rule('/', 'index', index_route, defaults=defaults)
