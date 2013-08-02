@@ -7,8 +7,6 @@ from datetime import datetime
 from flask import request
 from flask.ext.restful import Resource, fields, marshal_with, abort
 
-mongo = None
-
 def serialize(obj):
     for k, v in obj.iteritems():
         if isinstance(v, dict):
@@ -26,15 +24,15 @@ class MetricList(Resource):
         extract_series = re.compile("\"\{\{(.*?)\}\}\"")
         metrics = []
 
-        for metric in mongo.db.metric.find():
+        for metric in self.mongo.db.metric.find():
 
-            chart = mongo.db.chart.find_one(metric['_id'])
+            chart = self.mongo.db.chart.find_one(metric['_id'])
 
             if chart:
                 chart_data = json.dumps(chart.get('chart', ''))
                 found_series = set(re.findall(extract_series, chart_data))
                 for series_name in found_series:
-                    series = mongo.db.series.find_one(series_name)
+                    series = self.mongo.db.series.find_one(series_name)
                     if series:
                         chart_data = re.sub('\"{{%s}}\"' % series_name,
                                             json.dumps(series['values']),
@@ -63,7 +61,7 @@ class Metric(Resource):
 
     @marshal_with(metric_fields)
     def get(self, metric_id):
-        return mongo.db.metric.find_one_or_404(metric_id)
+        return self.mongo.db.metric.find_one_or_404(metric_id)
 
     @marshal_with(metric_fields)
     def post(self, metric_id):
@@ -73,10 +71,10 @@ class Metric(Resource):
             value = request.form.get(arg, None)
             if value:
                 obj[arg] = value
-        mongo.db.metric.update({'_id': metric_id},
+        self.mongo.db.metric.update({'_id': metric_id},
                                {'$set': obj},
                                upsert=True)
-        return mongo.db.metric.find_one(metric_id), 201
+        return self.mongo.db.metric.find_one(metric_id), 201
 
     @marshal_with(metric_fields)
     def put(self, metric_id):
@@ -86,11 +84,11 @@ class Metric(Resource):
             value = request.form.get(arg, None)
             if value:
                 obj[arg] = value
-        mongo.db.metric.save(obj)
+        self.mongo.db.metric.save(obj)
         return obj, 201
 
     def delete(self, metric_id):
-        mongo.db.metric.remove(metric_id)
+        self.mongo.db.metric.remove(metric_id)
         return '', 204
 
 
@@ -99,7 +97,7 @@ class Chart(Resource):
 
     Metrics will still be displayed if they don't have charts.
 
-    The Vega JSON is stored as-is in Mongo. Royale views can bind
+    The Vega JSON is stored as-is in Self.Mongo. Royale views can bind
     Charts to Series using the {{series_name}} construct in
     the Vega data field. """
 
@@ -108,27 +106,27 @@ class Chart(Resource):
 
     @marshal_with(chart_fields)
     def get(self, chart_id):
-        return mongo.db.chart.find_one_or_404(chart_id)
+        return self.mongo.db.chart.find_one_or_404(chart_id)
 
     @marshal_with(chart_fields)
     def post(self, chart_id):
         obj = json.loads(request.form['chart'])
-        mongo.db.chart.update({'_id': chart_id},
+        self.mongo.db.chart.update({'_id': chart_id},
                               {'chart': {'$set': obj},
                                '$set': {'updated': datetime.utcnow()}},
                               upsert=True)
-        return mongo.db.series.find_one(chart_id), 201
+        return self.mongo.db.series.find_one(chart_id), 201
 
     @marshal_with(chart_fields)
     def put(self, chart_id):
         obj = {'_id': chart_id,
                'chart': json.loads(request.form['chart']),
                'updated': datetime.utcnow()}
-        mongo.db.chart.save(obj)
+        self.mongo.db.chart.save(obj)
         return obj, 201
 
     def delete(self, chart_id):
-        mongo.db.chart.remove(chart_id)
+        self.mongo.db.chart.remove(chart_id)
         return '', 204
 
 
@@ -143,16 +141,16 @@ class Series(Resource):
 
     @marshal_with(series_fields)
     def get(self, series_id):
-        return mongo.db.series.find_one_or_404(series_id)
+        return self.mongo.db.series.find_one_or_404(series_id)
 
     @marshal_with(series_fields)
     def post(self, series_id):
         obj = json.loads(request.form['values'])
-        mongo.db.series.update({'_id': series_id},
+        self.mongo.db.series.update({'_id': series_id},
                                {'$push': {'values': obj},
                                 '$set': {'updated': datetime.utcnow()}},
                                upsert=True)
-        return mongo.db.series.find_one(series_id), 201
+        return self.mongo.db.series.find_one(series_id), 201
 
     @marshal_with(series_fields)
     def put(self, series_id):
@@ -161,19 +159,36 @@ class Series(Resource):
                'updated': datetime.utcnow()}
         if not isinstance(obj['values'], list):
             abort(400, error="values must be a list")
-        mongo.db.series.save(obj)
+        self.mongo.db.series.save(obj)
         return obj, 201
 
     def delete(self, series_id):
-        mongo.db.series.remove(series_id)
+        self.mongo.db.series.remove(series_id)
         return '', 204
 
 def register_resources(api, mongo_instance):
 
-    global mongo
-    mongo = mongo_instance
+    # We really dug too deep here with Flask blueprints and extensions.
+    # Flask-Restful requires classes as arguments, but these needed
+    # to also be dynamic. Maybe metaclasses would have been better?
+    # For now, we have fake inheritance. And Balrogs.
 
-    api.add_resource(MetricList, '/metrics')
-    api.add_resource(Metric, '/metric/<string:metric_id>')
-    api.add_resource(Chart, '/chart/<string:chart_id>')
-    api.add_resource(Series, '/series/<string:series_id>')
+    class MetricListCopy(MetricList): pass
+    cls = MetricListCopy
+    cls.mongo = mongo_instance
+    api.add_resource(cls, '/metrics')
+
+    class MetricCopy(Metric): pass
+    cls = MetricCopy
+    cls.mongo = mongo_instance
+    api.add_resource(cls, '/metric/<string:metric_id>')
+
+    class ChartCopy(Chart): pass
+    cls = ChartCopy
+    cls.mongo = mongo_instance
+    api.add_resource(cls, '/chart/<string:chart_id>')
+
+    class SeriesCopy(Series): pass
+    cls = SeriesCopy
+    cls.mongo = mongo_instance
+    api.add_resource(cls, '/series/<string:series_id>')
