@@ -24,7 +24,7 @@ class MetricList(Resource):
         extract_series = re.compile("\"\{\{(.*?)\}\}\"")
         metrics = []
 
-        for metric in self.mongo.db.metric.find():
+        for metric in self.mongo.db.metric.find().sort('priority', 1):
 
             chart = self.mongo.db.chart.find_one(metric['_id'])
 
@@ -57,7 +57,8 @@ class Metric(Resource):
                      'current': fields.String,
                      'current_caption': fields.String,
                      'compare': fields.String,
-                     'compare_caption': fields.String}
+                     'compare_caption': fields.String,
+                     'priority': fields.Integer}
 
     @marshal_with(metric_fields)
     def get(self, metric_id):
@@ -67,20 +68,22 @@ class Metric(Resource):
     def post(self, metric_id):
         obj = {'updated': datetime.utcnow()}
         for arg in ['caption', 'compare', 'current',
-                    'current_caption', 'compare_caption']:
+                    'current_caption', 'compare_caption',
+                    'priority']:
             value = request.form.get(arg, None)
             if value:
                 obj[arg] = value
         self.mongo.db.metric.update({'_id': metric_id},
-                               {'$set': obj},
-                               upsert=True)
+                                    {'$set': obj},
+                                    upsert=True)
         return self.mongo.db.metric.find_one(metric_id), 201
 
     @marshal_with(metric_fields)
     def put(self, metric_id):
         obj = {'_id': metric_id, 'updated': datetime.utcnow()}
         for arg in ['caption', 'compare', 'current',
-                    'current_caption', 'compare_caption']:
+                    'current_caption', 'compare_caption',
+                    'priority']:
             value = request.form.get(arg, None)
             if value:
                 obj[arg] = value
